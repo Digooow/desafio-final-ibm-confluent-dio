@@ -36,3 +36,10 @@ temp/
 *.sqlite3
 data/
 
+# Local tooling / challenge handout files
+.agents/
+skills-lock.json
+desafiokafka.pdf
+regras-desafio.md
+
+
