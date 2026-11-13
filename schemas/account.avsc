@@ -1,0 +1,48 @@
+{
+  "type": "record",
+  "namespace": "com.bootcamp.payments",
+  "name": "Account",
+  "doc": "Contas correntes/pagamento associadas aos clientes",
+  "fields": [
+    {
+      "name": "account_id",
+      "type": "long",
+      "doc": "Identificador único da conta"
+    },
+    {
+      "name": "customer_id",
+      "type": "long",
+      "doc": "FK para Customer"
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "default": "ACTIVE",
+      "doc": "Status da conta (ACTIVE, BLOCKED, CLOSED)"
+    },
+    {
+      "name": "balance",
+      "type": {
+        "type": "bytes",
+        "logicalType": "decimal",
+        "precision": 15,
+        "scale": 2
+      },
+      "doc": "Saldo atual com precisão financeira exata"
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "default": "BRL",
+      "doc": "Código ISO 4217 da moeda"
+    },
+    {
+      "name": "updated_at",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Última atualização em UTC (epoch millis)"
+    }
+  ]
+}

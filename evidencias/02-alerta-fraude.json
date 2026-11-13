@@ -1,0 +1,79 @@
+{
+  "captured_at_utc": "2026-11-13T07:18:23.810703+00:00",
+  "flink_statement": {
+    "name": "desafio-fraud-velocity",
+    "compute_pool": "lfcp-v7w88k5",
+    "idle_timeout": "5s",
+    "rule": "RULE_VELOCITY (MATCH_RECOGNIZE PARTITION BY card_id PATTERN (T{3,}?) WITHIN INTERVAL 60 SECOND)"
+  },
+  "trigger_transactions": [
+    {
+      "transaction_id": 2001,
+      "account_id": 1,
+      "card_id": 1,
+      "merchant_id": 1,
+      "amount": "185.40",
+      "currency": "BRL",
+      "status": "APPROVED",
+      "channel": "POS",
+      "created_at": "2026-11-13T07:16:28.224000"
+    },
+    {
+      "transaction_id": 2002,
+      "account_id": 1,
+      "card_id": 1,
+      "merchant_id": 1,
+      "amount": "319.90",
+      "currency": "BRL",
+      "status": "APPROVED",
+      "channel": "ECOMMERCE",
+      "created_at": "2026-11-13T07:16:33.224000"
+    },
+    {
+      "transaction_id": 2003,
+      "account_id": 1,
+      "card_id": 1,
+      "merchant_id": 1,
+      "amount": "642.15",
+      "currency": "BRL",
+      "status": "APPROVED",
+      "channel": "CONTACTLESS",
+      "created_at": "2026-11-13T07:16:38.224000"
+    }
+  ],
+  "fraud_alert": {
+    "topic": "desafio.fraud.detected",
+    "partition": 0,
+    "offset": 0,
+    "key": "RULE_VELOCITY:1:2001",
+    "value": {
+      "account_id": 1,
+      "alert_id": "RULE_VELOCITY:1:2001",
+      "card_id": 1,
+      "rule_name": "RULE_VELOCITY",
+      "total_amount": "1147.45",
+      "tx_count": 3,
+      "window_end": "2026-11-13T07:16:38.224000+00:00",
+      "window_start": "2026-11-13T07:16:28.224000+00:00"
+    }
+  },
+  "idempotency_verification": {
+    "run_1_group": "desafio-fraud-consumer",
+    "run_2_replay_group": "desafio-fraud-replay",
+    "processed_alerts_count": 1,
+    "fraud_actions_count": 1,
+    "recorded_action": {
+      "action_id": 1,
+      "alert_id": "RULE_VELOCITY:1:2001",
+      "card_id": 1,
+      "account_id": 1,
+      "rule_name": "RULE_VELOCITY",
+      "tx_count": 3,
+      "total_amount": "1147.45",
+      "window_start": "2026-11-13T07:16:28.224000+00:00",
+      "window_end": "2026-11-13T07:16:38.224000+00:00",
+      "action_status": "BLOCK_CARD_REVIEW",
+      "applied_at": "2026-11-13T07:18:04.419842+00:00"
+    }
+  }
+}

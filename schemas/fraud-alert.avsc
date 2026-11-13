@@ -1,0 +1,60 @@
+{
+  "type": "record",
+  "namespace": "com.bootcamp.payments",
+  "name": "FraudAlert",
+  "doc": "Alerta emitido pelo Flink SQL para regra de velocidade de transações suspeitas",
+  "fields": [
+    {
+      "name": "alert_id",
+      "type": "string",
+      "doc": "Chave determinística/idempotente do alerta"
+    },
+    {
+      "name": "card_id",
+      "type": "long",
+      "confluent:tags": ["PCI"],
+      "doc": "Cartão que disparou a regra de fraude"
+    },
+    {
+      "name": "account_id",
+      "type": "long",
+      "doc": "Conta associada ao cartão"
+    },
+    {
+      "name": "rule_name",
+      "type": "string",
+      "doc": "Regra disparada (ex.: RULE_VELOCITY)"
+    },
+    {
+      "name": "tx_count",
+      "type": "long",
+      "doc": "Quantidade de transações na janela"
+    },
+    {
+      "name": "total_amount",
+      "type": {
+        "type": "bytes",
+        "logicalType": "decimal",
+        "precision": 15,
+        "scale": 2
+      },
+      "doc": "Valor acumulado na janela suspeita"
+    },
+    {
+      "name": "window_start",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Início da janela da sequência suspeita"
+    },
+    {
+      "name": "window_end",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Fim da janela da sequência suspeita"
+    }
+  ]
+}

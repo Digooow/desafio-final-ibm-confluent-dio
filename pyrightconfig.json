@@ -1,0 +1,11 @@
+{
+  "venvPath": ".",
+  "venv": ".venv",
+  "pythonVersion": "3.14",
+  "typeCheckingMode": "strict",
+  "include": [
+    "consumers",
+    "scripts",
+    "tests"
+  ]
+}

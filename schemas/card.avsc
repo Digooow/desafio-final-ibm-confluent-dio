@@ -1,0 +1,49 @@
+{
+  "type": "record",
+  "namespace": "com.bootcamp.payments",
+  "name": "Card",
+  "doc": "Cartões vinculados às contas (sem PAN em texto puro por conformidade PCI-DSS)",
+  "fields": [
+    {
+      "name": "card_id",
+      "type": "long",
+      "doc": "Identificador único do cartão"
+    },
+    {
+      "name": "account_id",
+      "type": "long",
+      "doc": "FK para Account"
+    },
+    {
+      "name": "card_fingerprint",
+      "type": "string",
+      "confluent:tags": ["PCI"],
+      "doc": "Hash/token irreversível do PAN"
+    },
+    {
+      "name": "last4",
+      "type": "string",
+      "confluent:tags": ["PCI"],
+      "doc": "Últimos 4 dígitos do cartão"
+    },
+    {
+      "name": "brand",
+      "type": "string",
+      "doc": "Bandeira do cartão (VISA, MASTERCARD, ELO)"
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "default": "ACTIVE",
+      "doc": "Status do cartão (ACTIVE, FROZEN, CANCELLED)"
+    },
+    {
+      "name": "created_at",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Data/hora de criação em UTC (epoch millis)"
+    }
+  ]
+}

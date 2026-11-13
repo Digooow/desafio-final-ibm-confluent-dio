@@ -1,0 +1,304 @@
+{
+  "captured_at_utc": "2026-11-13T07:26:46.215929+00:00",
+  "environment_id": "env-g2mqjm",
+  "cluster_id": "lkc-j57zvdp",
+  "observability": {
+    "received_bytes_summary": {
+      "points_count": 30,
+      "non_zero_buckets": 30,
+      "peak_bytes_per_min": 507577.0,
+      "peak_timestamp": "2026-11-13T06:57:00Z",
+      "total_bytes": 511938.0
+    },
+    "consumer_lag_metrics_api": [
+      {
+        "consumer_group_id": "desafio-audit-check",
+        "topic": "desafio.fraud.detected",
+        "samples": 1,
+        "latest_lag_offsets": 1.0,
+        "latest_timestamp": "2026-11-13T07:26:00Z",
+        "peak_lag_offsets": 1.0
+      },
+      {
+        "consumer_group_id": "desafio-fraud-consumer",
+        "topic": "desafio.fraud.detected",
+        "samples": 6,
+        "latest_lag_offsets": 1.0,
+        "latest_timestamp": "2026-11-13T07:26:00Z",
+        "peak_lag_offsets": 1.0
+      },
+      {
+        "consumer_group_id": "desafio-fraud-replay",
+        "topic": "desafio.fraud.detected",
+        "samples": 5,
+        "latest_lag_offsets": 1.0,
+        "latest_timestamp": "2026-11-13T07:26:00Z",
+        "peak_lag_offsets": 1.0
+      },
+      {
+        "consumer_group_id": "desafio-inspect-1",
+        "topic": "desafio.fraud.detected",
+        "samples": 6,
+        "latest_lag_offsets": 1.0,
+        "latest_timestamp": "2026-11-13T07:26:00Z",
+        "peak_lag_offsets": 1.0
+      }
+    ],
+    "consumer_group_lag_cli": {
+      "desafio-audit-check": {
+        "error": "Error: Kafka cluster \"lkc-j57zvdp\" is type \"BASIC\" but must be type \"DEDICATED\""
+      },
+      "desafio-fraud-consumer": {
+        "error": "Error: Kafka cluster \"lkc-j57zvdp\" is type \"BASIC\" but must be type \"DEDICATED\""
+      },
+      "desafio-fraud-replay": {
+        "error": "Error: Kafka cluster \"lkc-j57zvdp\" is type \"BASIC\" but must be type \"DEDICATED\""
+      },
+      "desafio-inspect-1": {
+        "error": "Error: Kafka cluster \"lkc-j57zvdp\" is type \"BASIC\" but must be type \"DEDICATED\""
+      }
+    }
+  },
+  "security_acls": [
+    {
+      "principal": "User:sa-8m6rm7m",
+      "permission": "ALLOW",
+      "operation": "DESCRIBE",
+      "resource_type": "TOPIC",
+      "resource_name": "desafio-",
+      "pattern_type": "PREFIXED"
+    },
+    {
+      "principal": "User:sa-8m6rm7m",
+      "permission": "ALLOW",
+      "operation": "DESCRIBE",
+      "resource_type": "TOPIC",
+      "resource_name": "desafio.",
+      "pattern_type": "PREFIXED"
+    },
+    {
+      "principal": "User:sa-8m6rm7m",
+      "permission": "ALLOW",
+      "operation": "IDEMPOTENT_WRITE",
+      "resource_type": "CLUSTER",
+      "resource_name": "kafka-cluster",
+      "pattern_type": "LITERAL"
+    },
+    {
+      "principal": "User:sa-8m6rm7m",
+      "permission": "ALLOW",
+      "operation": "WRITE",
+      "resource_type": "TOPIC",
+      "resource_name": "desafio-",
+      "pattern_type": "PREFIXED"
+    },
+    {
+      "principal": "User:sa-8m6rm7m",
+      "permission": "ALLOW",
+      "operation": "WRITE",
+      "resource_type": "TOPIC",
+      "resource_name": "desafio.",
+      "pattern_type": "PREFIXED"
+    },
+    {
+      "principal": "User:sa-dgpjg5z",
+      "permission": "ALLOW",
+      "operation": "DESCRIBE",
+      "resource_type": "GROUP",
+      "resource_name": "desafio-",
+      "pattern_type": "PREFIXED"
+    },
+    {
+      "principal": "User:sa-dgpjg5z",
+      "permission": "ALLOW",
+      "operation": "DESCRIBE",
+      "resource_type": "TOPIC",
+      "resource_name": "desafio-",
+      "pattern_type": "PREFIXED"
+    },
+    {
+      "principal": "User:sa-dgpjg5z",
+      "permission": "ALLOW",
+      "operation": "DESCRIBE",
+      "resource_type": "TOPIC",
+      "resource_name": "desafio.",
+      "pattern_type": "PREFIXED"
+    },
+    {
+      "principal": "User:sa-dgpjg5z",
+      "permission": "ALLOW",
+      "operation": "READ",
+      "resource_type": "GROUP",
+      "resource_name": "desafio-",
+      "pattern_type": "PREFIXED"
+    },
+    {
+      "principal": "User:sa-dgpjg5z",
+      "permission": "ALLOW",
+      "operation": "READ",
+      "resource_type": "TOPIC",
+      "resource_name": "desafio-",
+      "pattern_type": "PREFIXED"
+    },
+    {
+      "principal": "User:sa-dgpjg5z",
+      "permission": "ALLOW",
+      "operation": "READ",
+      "resource_type": "TOPIC",
+      "resource_name": "desafio.",
+      "pattern_type": "PREFIXED"
+    }
+  ],
+  "costs_and_capacity": {
+    "billing_cost_window": "2026-11-06..2026-11-14",
+    "billing_cost_entries": [],
+    "flink_compute_pool": {
+      "is_current": true,
+      "id": "lfcp-v7w88k5",
+      "name": "desafio-flink",
+      "cloud": "AWS",
+      "environment": "env-g2mqjm",
+      "max_cfu": 5,
+      "region": "us-east-1",
+      "currrent_cfu": 1,
+      "status": "PROVISIONED",
+      "default_pool": false
+    },
+    "connectors": [
+      {
+        "id": "lcc-v7w88yn",
+        "name": "desafio-neon-pg-cdc",
+        "status": "RUNNING",
+        "type": "source"
+      }
+    ],
+    "basic_unit_prices": [
+      {
+        "metric": "ClusterLinkingPerLink",
+        "cluster_type": "basic",
+        "availability": "high",
+        "network_type": "internet",
+        "price": 0.25
+      },
+      {
+        "metric": "ClusterLinkingPerLink",
+        "cluster_type": "basic",
+        "availability": "low",
+        "network_type": "internet",
+        "price": 0.25
+      },
+      {
+        "metric": "ClusterLinkingRead",
+        "cluster_type": "basic",
+        "availability": "high",
+        "network_type": "internet",
+        "price": 0.25
+      },
+      {
+        "metric": "ClusterLinkingRead",
+        "cluster_type": "basic",
+        "availability": "low",
+        "network_type": "internet",
+        "price": 0.25
+      },
+      {
+        "metric": "ClusterLinkingWrite",
+        "cluster_type": "basic",
+        "availability": "high",
+        "network_type": "internet",
+        "price": 0.13
+      },
+      {
+        "metric": "ClusterLinkingWrite",
+        "cluster_type": "basic",
+        "availability": "low",
+        "network_type": "internet",
+        "price": 0.13
+      },
+      {
+        "metric": "KSQLNumCSUs",
+        "cluster_type": "basic",
+        "availability": "high",
+        "network_type": "internet",
+        "price": 0.22222222
+      },
+      {
+        "metric": "KSQLNumCSUs",
+        "cluster_type": "basic",
+        "availability": "low",
+        "network_type": "internet",
+        "price": 0.22222222
+      },
+      {
+        "metric": "KafkaNetworkRead",
+        "cluster_type": "basic",
+        "availability": "high",
+        "network_type": "internet",
+        "price": 0.05
+      },
+      {
+        "metric": "KafkaNetworkRead",
+        "cluster_type": "basic",
+        "availability": "low",
+        "network_type": "internet",
+        "price": 0.05
+      },
+      {
+        "metric": "KafkaNetworkWrite",
+        "cluster_type": "basic",
+        "availability": "high",
+        "network_type": "internet",
+        "price": 0.05
+      },
+      {
+        "metric": "KafkaNetworkWrite",
+        "cluster_type": "basic",
+        "availability": "low",
+        "network_type": "internet",
+        "price": 0.05
+      },
+      {
+        "metric": "KafkaNumCKUs",
+        "cluster_type": "basic",
+        "availability": "high",
+        "network_type": "internet",
+        "price": 0.135
+      },
+      {
+        "metric": "KafkaNumCKUs",
+        "cluster_type": "basic",
+        "availability": "low",
+        "network_type": "internet",
+        "price": 0.135
+      },
+      {
+        "metric": "KafkaRestProduce",
+        "cluster_type": "basic",
+        "availability": "high",
+        "network_type": "internet",
+        "price": 0.01
+      },
+      {
+        "metric": "KafkaRestProduce",
+        "cluster_type": "basic",
+        "availability": "low",
+        "network_type": "internet",
+        "price": 0.01
+      },
+      {
+        "metric": "KafkaStorage",
+        "cluster_type": "basic",
+        "availability": "high",
+        "network_type": "internet",
+        "price": 0.00010959
+      },
+      {
+        "metric": "KafkaStorage",
+        "cluster_type": "basic",
+        "availability": "low",
+        "network_type": "internet",
+        "price": 0.00010959
+      }
+    ]
+  }
+}

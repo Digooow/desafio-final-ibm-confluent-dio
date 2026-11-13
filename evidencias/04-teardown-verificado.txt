@@ -1,0 +1,99 @@
+==> Limpando recursos no environment desafio-final (env-g2mqjm)...
+No Flink endpoint is specified, defaulting to public endpoint: https://flink.us-east-1.aws.confluent.cloud
+Deleted Flink SQL statement "cli-query-2026-11-13-035801-9c1e332c-8950-4e40-b1f3-6095fdb28ee4".
+No Flink endpoint is specified, defaulting to public endpoint: https://flink.us-east-1.aws.confluent.cloud
+Deleted Flink SQL statement "cli-query-2026-11-13-035805-aa0520ac-021e-4c8f-b6f9-802d455c7b52".
+No Flink endpoint is specified, defaulting to public endpoint: https://flink.us-east-1.aws.confluent.cloud
+Deleted Flink SQL statement "cli-query-2026-11-13-035808-4049e2c7-dcc0-4780-9bea-e8529301cc87".
+No Flink endpoint is specified, defaulting to public endpoint: https://flink.us-east-1.aws.confluent.cloud
+Deleted Flink SQL statement "cli-query-2026-11-13-035812-b0114e74-e9d1-4534-b3de-2b8d8c882dea".
+No Flink endpoint is specified, defaulting to public endpoint: https://flink.us-east-1.aws.confluent.cloud
+Deleted Flink SQL statement "cli-query-2026-11-13-040159-d4838242-859f-4960-b641-0fc352fd4871".
+No Flink endpoint is specified, defaulting to public endpoint: https://flink.us-east-1.aws.confluent.cloud
+Deleted Flink SQL statement "cli-query-2026-11-13-040202-f39801eb-6eac-4254-8d19-f1747f0d680e".
+No Flink endpoint is specified, defaulting to public endpoint: https://flink.us-east-1.aws.confluent.cloud
+Deleted Flink SQL statement "cli-query-2026-11-13-040206-6a25147f-0c78-46ca-8962-8e13b91b589e".
+No Flink endpoint is specified, defaulting to public endpoint: https://flink.us-east-1.aws.confluent.cloud
+Deleted Flink SQL statement "cli-query-2026-11-13-040245-7fb5d63c-f203-43ae-9df3-af5ee9cff124".
+No Flink endpoint is specified, defaulting to public endpoint: https://flink.us-east-1.aws.confluent.cloud
+Deleted Flink SQL statement "cli-query-2026-11-13-040250-c5ae837d-88dc-4bb4-80bd-2e6fe8f2d60b".
+No Flink endpoint is specified, defaulting to public endpoint: https://flink.us-east-1.aws.confluent.cloud
+Deleted Flink SQL statement "cli-query-2026-11-13-040408-de429aa0-0b31-454d-93da-3e75986fb776".
+No Flink endpoint is specified, defaulting to public endpoint: https://flink.us-east-1.aws.confluent.cloud
+Deleted Flink SQL statement "cli-query-2026-11-13-041333-933893d6-1a76-4dc2-bfaf-2387ecf3e17d".
+No Flink endpoint is specified, defaulting to public endpoint: https://flink.us-east-1.aws.confluent.cloud
+Deleted Flink SQL statement "desafio-fraud-velocity".
+--- Verificação Flink statements pós-limpeza:
+No Flink endpoint is specified, defaulting to public endpoint: https://flink.us-east-1.aws.confluent.cloud
+          Creation Date          |          Name          |             Statement             | Compute Pool |  Status  | Status Detail | Latest Offsets |   Latest Offsets Timestamp     
+---------------------------------+------------------------+-----------------------------------+--------------+----------+---------------+----------------+--------------------------------
+  2026-11-13 07:18:37.920568     | desafio-fraud-velocity | INSERT INTO                       | lfcp-v7w88k5 | DELETING |               |                | 0001-01-01 00:00:00 +0000 UTC  
+  +0000 UTC                      |                        | `desafio.fraud.detected` (        |              |          |               |                |                                
+                                 |                        | `key`,   alert_id,   card_id,     |              |          |               |                |                                
+                                 |                        |   account_id,   rule_name,        |              |          |               |                |                                
+                                 |                        |  tx_count,   total_amount,        |              |          |               |                |                                
+                                 |                        | window_start,   window_end )      |              |          |               |                |                                
+                                 |                        | SELECT   ENCODE(     CONCAT(      |              |          |               |                |                                
+                                 |                        |       'RULE_VELOCITY:',           |              |          |               |                |                                
+                                 |                        |  CAST(card_id AS STRING),         |              |          |               |                |                                
+                                 |                        |   ':',       CAST(first_tx_id     |              |          |               |                |                                
+                                 |                        | AS STRING)     ),     'UTF-8'     |              |          |               |                |                                
+                                 |                        |   ) AS `key`,   CONCAT(           |              |          |               |                |                                
+                                 |                        |    'RULE_VELOCITY:',              |              |          |               |                |                                
+                                 |                        | CAST(card_id AS STRING),     ':', |              |          |               |                |                                
+                                 |                        |     CAST(first_tx_id AS STRING)   |              |          |               |                |                                
+                                 |                        |   ) AS alert_id,   card_id,       |              |          |               |                |                                
+                                 |                        | account_id,   'RULE_VELOCITY'     |              |          |               |                |                                
+                                 |                        | AS rule_name,   tx_count,         |              |          |               |                |                                
+                                 |                        | total_amount,   window_start,     |              |          |               |                |                                
+                                 |                        |   window_end FROM (   SELECT      |              |          |               |                |                                
+                                 |                        |     t.transaction_id,             |              |          |               |                |                                
+                                 |                        | t.card_id,     t.account_id,      |              |          |               |                |                                
+                                 |                        | t.amount,     t.created_at   FROM |              |          |               |                |                                
+                                 |                        | `desafio.cdc.public.transactions` |              |          |               |                |                                
+                                 |                        | AS t   JOIN                       |              |          |               |                |                                
+                                 |                        | `desafio.cdc.public.accounts` FOR |              |          |               |                |                                
+                                 |                        | SYSTEM_TIME AS OF t.created_at    |              |          |               |                |                                
+                                 |                        | AS a     ON t.account_id =        |              |          |               |                |                                
+                                 |                        | a.account_id   WHERE t.status     |              |          |               |                |                                
+                                 |                        | = 'APPROVED'     AND a.status     |              |          |               |                |                                
+                                 |                        | = 'ACTIVE' ) MATCH_RECOGNIZE      |              |          |               |                |                                
+                                 |                        | (   PARTITION BY card_id          |              |          |               |                |                                
+                                 |                        | ORDER BY created_at   MEASURES    |              |          |               |                |                                
+                                 |                        |     FIRST(T.transaction_id)       |              |          |               |                |                                
+                                 |                        | AS first_tx_id,                   |              |          |               |                |                                
+                                 |                        | FIRST(T.account_id)               |              |          |               |                |                                
+                                 |                        | AS account_id,                    |              |          |               |                |                                
+                                 |                        | COUNT(T.transaction_id) AS        |              |          |               |                |                                
+                                 |                        | tx_count,     SUM(T.amount)       |              |          |               |                |                                
+                                 |                        | AS total_amount,                  |              |          |               |                |                                
+                                 |                        |  FIRST(T.created_at)              |              |          |               |                |                                
+                                 |                        | AS window_start,                  |              |          |               |                |                                
+                                 |                        | LAST(T.created_at) AS window_end  |              |          |               |                |                                
+                                 |                        |   ONE ROW PER MATCH   AFTER MATCH |              |          |               |                |                                
+                                 |                        | SKIP PAST LAST ROW   PATTERN      |              |          |               |                |                                
+                                 |                        | (T{3,}?) WITHIN INTERVAL '60'     |              |          |               |                |                                
+                                 |                        | SECOND   DEFINE T AS TRUE )       |              |          |               |                |                                
+Requested to delete Flink compute pool lfcp-v7w88k5.
+--- Verificação Flink compute pools pós-limpeza:
+None found.
+Deleted connector "lcc-v7w88yn".
+--- Verificação conectores Kafka Connect (lkc-j57zvdp) pós-limpeza:
+None found.
+    Deletando cluster Kafka lkc-j57zvdp...
+Deleted Kafka cluster "lkc-j57zvdp".
+    Deletando environment env-g2mqjm...
+Deleted environment "env-g2mqjm".
+    Deletando Service Account desafio-producer (sa-8m6rm7m)...
+Deleted IAM service account "sa-8m6rm7m".
+    Deletando Service Account desafio-consumer (sa-dgpjg5z)...
+Deleted IAM service account "sa-dgpjg5z".
+
+==> Verificação final pós-teardown:
+--- Service Accounts (desafio-*):
+[]
+--- Environments (desafio-final):
+[]
+--- API Keys restantes (desafio-*):
+[]
+✅ Teardown concluído.

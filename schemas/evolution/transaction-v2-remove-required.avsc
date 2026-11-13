@@ -1,0 +1,45 @@
+{
+  "type": "record",
+  "namespace": "com.bootcamp.payments",
+  "name": "Transaction",
+  "doc": "Teste de quebra de contrato: remove campo obrigatório 'amount' (sem default) e/ou exige campo sem default",
+  "fields": [
+    {
+      "name": "transaction_id",
+      "type": "long"
+    },
+    {
+      "name": "account_id",
+      "type": "long"
+    },
+    {
+      "name": "card_id",
+      "type": "long",
+      "confluent:tags": ["PCI"]
+    },
+    {
+      "name": "merchant_id",
+      "type": "long"
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "default": "BRL"
+    },
+    {
+      "name": "status",
+      "type": "string"
+    },
+    {
+      "name": "channel",
+      "type": "string"
+    },
+    {
+      "name": "created_at",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    }
+  ]
+}

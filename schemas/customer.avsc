@@ -1,0 +1,45 @@
+{
+  "type": "record",
+  "namespace": "com.bootcamp.payments",
+  "name": "Customer",
+  "doc": "Cadastro de clientes do sistema de pagamentos",
+  "fields": [
+    {
+      "name": "customer_id",
+      "type": "long",
+      "doc": "Identificador único do cliente"
+    },
+    {
+      "name": "full_name",
+      "type": "string",
+      "confluent:tags": ["PII"],
+      "doc": "Nome completo do cliente"
+    },
+    {
+      "name": "email",
+      "type": "string",
+      "confluent:tags": ["PII"],
+      "doc": "Endereço de e-mail do cliente"
+    },
+    {
+      "name": "document_id",
+      "type": "string",
+      "confluent:tags": ["PII"],
+      "doc": "Documento fiscal (CPF/CNPJ mascarado ou tokenizado)"
+    },
+    {
+      "name": "risk_tier",
+      "type": "string",
+      "default": "LOW",
+      "doc": "Perfil de risco do cliente (LOW, MEDIUM, HIGH)"
+    },
+    {
+      "name": "created_at",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Data/hora de criação em UTC (epoch millis)"
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "type": "record",
+  "namespace": "com.bootcamp.payments",
+  "name": "Transaction",
+  "doc": "Eventos de transação de pagamento com cartão",
+  "fields": [
+    {
+      "name": "transaction_id",
+      "type": "long",
+      "doc": "Identificador único da transação"
+    },
+    {
+      "name": "account_id",
+      "type": "long",
+      "doc": "Conta associada"
+    },
+    {
+      "name": "card_id",
+      "type": "long",
+      "confluent:tags": ["PCI"],
+      "doc": "Identificador do cartão utilizado"
+    },
+    {
+      "name": "merchant_id",
+      "type": "long",
+      "doc": "Lojista recebedor"
+    },
+    {
+      "name": "amount",
+      "type": {
+        "type": "bytes",
+        "logicalType": "decimal",
+        "precision": 15,
+        "scale": 2
+      },
+      "doc": "Valor da transação com precisão decimal(15,2)"
+    },
+    {
+      "name": "currency",
+      "type": "string",
+      "default": "BRL",
+      "doc": "Moeda da transação (ISO 4217)"
+    },
+    {
+      "name": "status",
+      "type": "string",
+      "doc": "Status da autorização (APPROVED, DECLINED, PENDING)"
+    },
+    {
+      "name": "channel",
+      "type": "string",
+      "doc": "Canal da compra (POS, ECOMMERCE, CONTACTLESS)"
+    },
+    {
+      "name": "created_at",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      },
+      "doc": "Timestamp da transação em UTC (epoch millis)"
+    }
+  ]
+}
