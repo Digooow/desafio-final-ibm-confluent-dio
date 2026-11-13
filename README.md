@@ -13,7 +13,7 @@ Projeto desenvolvido para o desafio final **IBM + Confluent + DIO**, implementan
 3. [Camada 3 — PostgreSQL (Neon), CDC Debezium e Prova Real de Envelopes](#3-camada-3--postgresql-neon-cdc-debezium-e-prova-real-de-envelopes)
 4. [Camada 4 — Flink SQL (Temporal Join + `MATCH_RECOGNIZE`) e Consumidor Idempotente](#4-camada-4--flink-sql-temporal-join--match_recognize-e-consumidor-idempotente)
 5. [Camada 5 — Observabilidade, Segurança, Custos, Confiabilidade e Teardown](#5-camada-5--observabilidade-segurança-custos-confiabilidade-e-teardown)
-6. [Auditoria de Qualidade de Código e Correções Aplicadas](#6-auditoria-de-qualidade-de-código-e-correções-aplicadas)
+6. [Refatoração, Qualidade de Código e Correções Aplicadas](#6-refatoração-qualidade-de-código-e-correções-aplicadas)
 7. [Estrutura do Repositório e Como Reproduzir](#7-estrutura-do-repositório-e-como-reproduzir)
 
 ---
@@ -117,7 +117,7 @@ O job `desafio-fraud-velocity` (Compute Pool `lfcp-v7w88k5`, estado `RUNNING`, `
 
 - **Execução 1 (`group_id = desafio-fraud-consumer`):** `outcome = "applied"`, `offset = 0`, `alert_id = "RULE_VELOCITY:1:2001"`, `tx_count = 3`, `total_amount = "1147.45"`.
 - **Execução 2 — Replay (`group_id = desafio-fraud-replay`, `--from-beginning`):** `outcome = "duplicate"`, mantendo a contagem exata no sink SQLite (`data/fraud_alerts_sink.db`) em **`1` alerta persistido / `1` chave de idempotência**.
-- **Execução 3 — Revalidação pós-auditoria (`group_id = desafio-audit-live`):** encerramento com código `0` e `duplicates_skipped = 1`.
+- **Execução 3 — Revalidação após refatoração (`group_id = desafio-audit-live`):** encerramento com código `0` e `duplicates_skipped = 1`.
 
 ---
 
@@ -225,14 +225,14 @@ Executado `./teardown.sh --yes` após toda a coleta de evidências, garantindo c
 
 ---
 
-## 6. Auditoria de Qualidade de Código e Correções Aplicadas
+## 6. Refatoração, Qualidade de Código e Correções Aplicadas
 
-Durante o desenvolvimento, o usuário reportou uma enxurrada de erros no arquivo [`consumers/fraud_consumer.py`](consumers/fraud_consumer.py). Foi conduzida uma **auditoria completa de engenharia sênior e segurança**, identificando **duas causas ambientais/ferramentais** e **bugs reais de produção** — todos corrigidos e verificados:
+Durante o desenvolvimento do consumidor [`consumers/fraud_consumer.py`](consumers/fraud_consumer.py), identifiquei inconsistências de tipagem e lint, além de pontos frágeis no tratamento de falhas e na configuração do `.venv`. Na revisão do projeto, corrigi o setup de desenvolvimento e os bugs de execução:
 
-### Veredito da Auditoria
+### Resultado das Verificações Após as Correções
 
-- **Antes das correções:** **Reprovado com Ressalvas Críticas** (risco real de perda silenciosa de alertas em falha de disco/banco + 34 apontamentos de lint + configuração de IDE desalinhada com o `.venv`).
-- **Depois das correções:** **Aprovado** (`0` erros no `ruff check .`, `0` erros/avisos no **Pyright `strict`** em todo o projeto, `42 passed` no `pytest -v`, scripts Bash validados com `bash -n`, e replay ao vivo contra a Confluent Cloud concluído com saída `0`).
+- **Antes da revisão:** risco de perda silenciosa de alertas em falha de persistência no SQLite, 34 apontamentos de lint e configuração de IDE desalinhada com o `.venv`.
+- **Depois da revisão:** `0` erros no `ruff check .`, `0` erros/avisos no **Pyright `strict`** em todo o projeto, `42 passed` no `pytest -v`, scripts Bash validados com `bash -n` e replay ao vivo na Confluent Cloud encerrado com saída `0`.
 
 ### Causas Raiz e Correções Aplicadas
 
